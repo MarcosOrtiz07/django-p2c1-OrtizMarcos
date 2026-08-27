@@ -1,23 +1,10 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 
-def inicio(request):
-    return HttpResponse(
-        "<h1>EcoEnergy</h1>"
-        "<p>Back End en funcionamiento</p>"
-    )
+# Asegúrate de importar la función si la tienes en utils.py/helpers.py,
+# o defínela arriba de las vistas si la tienes en este mismo archivo.
+from .utils import cargar_dispositivos
 
-
-def dispositivos_zona(request, zona_id):
-    if zona_id != 3:
-        return HttpResponse(
-            "Zona no encontrada",
-            status=404
-        )
-
-    return HttpResponse(
-        f"Dispositivos de la zona {zona_id}"
-    )
 
 def inicio(request):
     contexto = {
@@ -27,10 +14,22 @@ def inicio(request):
     }
     return render(request, "dispositivos/inicio.html", contexto)
 
+
+def dispositivos_zona(request, zona_id):
+    if zona_id != 3:
+        return HttpResponse("Zona no encontrada", status=404)
+
+    return HttpResponse(f"Dispositivos de la zona {zona_id}")
+
+
 def catalogo(request):
-    dispositivos = [
-        {"nombre": "Medidor inteligente", "estado": "Activo"},
-        {"nombre": "Sensor de temperatura", "estado": "Activo"},
-        {"nombre": "Climatizador", "estado": "Revisión"},
-    ]
-    return render(request, "dispositivos/catalogo.html", {"dispositivos": dispositivos})
+    dispositivos = cargar_dispositivos()
+    activos = sum(1 for item in dispositivos if item["estado"] == "Activo")
+
+    contexto = {
+        "dispositivos": dispositivos,
+        "total": len(dispositivos),
+        "total_activos": activos,
+    }
+
+    return render(request, "dispositivos/catalogo.html", contexto)
