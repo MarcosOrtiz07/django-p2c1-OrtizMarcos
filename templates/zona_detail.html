@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+        <h2 class="fw-bold text-danger mb-0">DETALLE DE ZONA: {{ zona.nombre }}</h2>
+    </div>
+    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <a href="{% url 'zonas_list' %}" class="btn btn-outline-danger btn-sm fw-semibold">&larr; Volver al listado</a>
+    </div>
+</div>
+<hr class="border-danger opacity-75 mb-4">
+
+<!-- Métricas superiores -->
+<div class="row mb-5 text-center">
+    <div class="col-md-3">
+        <div class="card shadow-sm border-danger mb-3 h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <h6 class="text-danger text-uppercase fw-bold mb-2">Límite</h6>
+                <h4 class="text-dark mb-0">{{ zona.limite_kwh }} kWh</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm border-danger mb-3 h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <h6 class="text-danger text-uppercase fw-bold mb-2">Consumo total</h6>
+                <h4 class="text-dark mb-0">{{ consumo_total }} kWh</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm border-danger mb-3 h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <h6 class="text-danger text-uppercase fw-bold mb-2">Dispositivos</h6>
+                <h4 class="text-dark mb-0">{{ cantidad_dispositivos }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm border-danger mb-3 h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <h6 class="text-danger text-uppercase fw-bold mb-2">Estado</h6>
+                <h4 class="mb-0">
+                    {% if estado == 'ALERTA' %}
+                        <span class="badge bg-danger rounded-pill px-3 py-2"><span aria-hidden="true">⚠️</span> ALERTA</span>
+                    {% else %}
+                        <span class="badge border border-danger text-danger bg-white rounded-pill px-3 py-2"><span aria-hidden="true">✅</span> NORMAL</span>
+                    {% endif %}
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabla de dispositivos -->
+<div class="row">
+    <div class="col">
+        <h4 class="text-danger fw-bold mb-3">Lista de Dispositivos</h4>
+        {% if dispositivos %}
+        <div class="table-responsive bg-white rounded shadow-sm border border-danger">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-danger border-danger">
+                    <tr>
+                        <th scope="col" class="text-danger fw-bold">Dispositivo</th>
+                        <th scope="col" class="text-danger fw-bold">Categoría</th>
+                        <th scope="col" class="text-danger fw-bold">Consumo kWh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for disp in dispositivos %}
+                    <tr>
+                        <td class="fw-semibold text-dark">{{ disp.nombre }}</td>
+                        <td><span class="badge bg-danger bg-opacity-75">{{ disp.categoria_nombre }}</span></td>
+                        <td class="text-dark">{{ disp.consumo_kwh }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-danger mt-3 shadow-sm" role="alert">
+            <span aria-hidden="true">ℹ️</span> Esta zona no tiene dispositivos.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

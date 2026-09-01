@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-5 text-center">
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow-sm border-danger">
+            <div class="card-body py-5">
+                <h1 class="display-1 text-danger fw-bold">404</h1>
+                <h2 class="mb-4">Zona no encontrada</h2>
+                <p class="lead text-muted mb-4">
+                    Lo sentimos, el identificador de la zona solicitada no existe o no se encuentra registrado en el sistema.
+                </p>
+                <a href="{% url 'zonas_list' %}" class="btn btn-primary btn-lg">
+                    Volver al listado de zonas
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

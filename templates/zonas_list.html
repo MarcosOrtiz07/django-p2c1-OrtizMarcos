@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2 class="fw-bold text-danger">ZONAS DE CONSUMO</h2>
+        <hr class="border-danger opacity-75">
+    </div>
+</div>
+
+<div class="row">
+    {% if zonas %}
+        {% for zona in zonas %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-danger">
+                <div class="card-body">
+                    <h5 class="card-title text-danger fw-bold">{{ zona.nombre }}</h5>
+                    <p class="card-text text-dark mt-3">
+                        <strong>Límite:</strong> {{ zona.limite_kwh }} kWh<br>
+                        <strong>Dispositivos:</strong> {{ zona.total_dispositivos }}
+                    </p>
+                </div>
+                <div class="card-footer bg-white border-top-0 pt-0">
+                    <a href="{% url 'zona_detail' id=zona.id %}" class="btn btn-danger w-100 fw-semibold">Ver detalle</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col">
+            <div class="alert alert-warning" role="alert">
+                No hay zonas disponibles.
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

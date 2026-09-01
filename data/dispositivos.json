@@ -1,14 +1,58 @@
 [
   {
     "id": 1,
-    "nombre": "Medidor inteligente",
-    "estado": "Activo",
-    "consumo_kwh": 18.4
+    "nombre": "Aire Acondicionado Central",
+    "consumo_kwh": 250.5,
+    "zona_id": 1,
+    "categoria_id": 101
   },
   {
     "id": 2,
-    "nombre": "Climatizador",
-    "estado": "Revisión",
-    "consumo_kwh": 32.7
+    "nombre": "Servidor Principal",
+    "consumo_kwh": 180.0,
+    "zona_id": 1,
+    "categoria_id": 103
+  },
+  {
+    "id": 3,
+    "nombre": "Iluminación LED Piso 1",
+    "consumo_kwh": 45.0,
+    "zona_id": 1,
+    "categoria_id": 103
+  },
+  {
+    "id": 4,
+    "nombre": "Compresor Industrial A",
+    "consumo_kwh": 650.0,
+    "zona_id": 2,
+    "categoria_id": 102
+  },
+  {
+    "id": 5,
+    "nombre": "Banda Transportadora 1",
+    "consumo_kwh": 420.0,
+    "zona_id": 2,
+    "categoria_id": 102
+  },
+  {
+    "id": 6,
+    "nombre": "Extractor de Aire",
+    "consumo_kwh": 150.0,
+    "zona_id": 2,
+    "categoria_id": 101
+  },
+  {
+    "id": 7,
+    "nombre": "Luminarias de Almacén",
+    "consumo_kwh": 85.0,
+    "zona_id": 3,
+    "categoria_id": 103
+  },
+  {
+    "id": 8,
+    "nombre": "Grúa Horquilla Eléctrica",
+    "consumo_kwh": 110.0,
+    "zona_id": 3,
+    "categoria_id": 102
   }
 ]

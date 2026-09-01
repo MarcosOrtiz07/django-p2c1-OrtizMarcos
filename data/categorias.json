@@ -1,0 +1,17 @@
+[
+  {
+    "id": 101,
+    "nombre": "Climatización",
+    "descripcion": "Equipos de aire acondicionado, calefacción y ventilación ambiental."
+  },
+  {
+    "id": 102,
+    "nombre": "Maquinaria Pesada",
+    "descripcion": "Motores, bandas transportadoras y equipos de alto consumo industrial."
+  },
+  {
+    "id": 103,
+    "nombre": "Iluminación y Cómputo",
+    "descripcion": "Sistemas de iluminación LED, servidores y computadores de oficina."
+  }
+]

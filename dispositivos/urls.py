@@ -1,14 +1,9 @@
 from django.urls import path
 from . import views
 
-app_name = "dispositivos"
-
 urlpatterns = [
     path("", views.inicio, name="inicio"),
-    path("dispositivos/", views.catalogo, name="catalogo"),
-    path(
-        "zonas/<int:zona_id>/dispositivos/",
-        views.dispositivos_zona,
-        name="por_zona",
-    ),
+    path("zonas/", views.zonas_list, name="zonas_list"),
+    path("zonas/<int:id>/", views.zona_detail, name="zona_detail"),
+    path("dispositivos/", views.dispositivos_list, name="dispositivos_list"),
 ]
