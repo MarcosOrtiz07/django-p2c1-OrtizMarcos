@@ -119,3 +119,51 @@ def dispositivos_list(request):
         'dispositivos': dispositivos
     }
     return render(request, 'dispositivos_list.html', contexto)
+
+
+def resumen_zona(request, id):
+
+    zonas = cargar_json('zonas.json')
+    dispositivos = cargar_json('dispositivos.json')
+    categorias = cargar_json('categorias.json')
+    
+    # Buscar la zona por ID
+    zona_actual = None
+    for z in zonas:
+        if z['id'] == id:
+            zona_actual = z
+            break
+            
+    if not zona_actual:
+        raise Http404("Zona no encontrada")
+        
+    disp_zona = []
+    consumo_total = 0.0
+    
+    for disp in dispositivos:
+        if disp.get('zona_id') == id:
+            nombre_cat = "Desconocida"
+            for c in categorias:
+                if c['id'] == disp.get('categoria_id'):
+                    nombre_cat = c['nombre']
+                    break
+            
+            disp['categoria_nombre'] = nombre_cat
+            disp_zona.append(disp)
+            consumo_total += float(disp.get('consumo_kwh', 0))
+            
+
+    limite = float(zona_actual.get('limite_kwh', 0))
+    if consumo_total > limite:
+        estado = "ALERTA"
+    else:
+        estado = "NORMAL"
+        
+    contexto = {
+        'zona': zona_actual,
+        'dispositivos': disp_zona,
+        'consumo_total': consumo_total,
+        'cantidad_dispositivos': len(disp_zona),
+        'estado': estado
+    }
+    return render(request, 'resumen_zona', contexto)    
